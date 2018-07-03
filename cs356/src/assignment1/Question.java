@@ -14,17 +14,29 @@ public abstract class Question {
 		this.q = q;
 	}
 	
-	public abstract void setAnswers(Student s, Answer a);
+	public abstract boolean setAnswers(Student s, Answer a);
 	
 	public void addAnswerChoice(Answer a) {
+		possibleAnswers.add(a);
 	}
+	
+	public abstract void addAnswerChoice(Answer a, boolean correct);
+	
+	public abstract void addCorrectAnswer(Answer a);
+	
+	public abstract int getNumberCorrect();
 	
 	public String getQuestion() {
 		return q;
 	}
 	
-	public void setQuestion() {
+	public void setQuestion(String q) {
+		this.q = q;
 	}
-
-
+	
+	public List<Answer> getPossibleAnswers() {
+		return possibleAnswers;
+	}
+	
+	public abstract Map<String, Integer> getResults();
 }
