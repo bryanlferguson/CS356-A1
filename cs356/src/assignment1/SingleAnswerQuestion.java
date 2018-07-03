@@ -2,10 +2,8 @@ package assignment1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 public class SingleAnswerQuestion extends Question{
 
@@ -18,8 +16,8 @@ public class SingleAnswerQuestion extends Question{
 	}
 
 	public boolean setAnswers(Student s, Answer a) {
-		//if (!getPossibleAnswers().contains(a))
-		//	return false;
+		if (!getPossibleAnswers().contains(a))
+			return false;
 		answers.put(s.getID(), a);
 		return true;
 	}
@@ -36,16 +34,16 @@ public class SingleAnswerQuestion extends Question{
 		addAnswerChoice(a);
 	}
 
-	public int getNumberCorrect() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public ArrayList<Answer> getCorrect() {
+		ArrayList<Answer> ret = new ArrayList<Answer>();
+		ret.add(correct);
+		return ret;
 	}
 
-	@Override
 	public Map<String, Integer> getResults() {
 		Map<String, Integer> ret = new HashMap<String, Integer>();
 		for (Answer value: answers.values()) {
-			System.out.println("here");
 			int temp = ret.get(value.toString()) == null ? 0 : ret.get(value.toString());
 			temp++;
 			ret.put(value.toString(), temp);

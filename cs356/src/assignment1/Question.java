@@ -24,7 +24,6 @@ public abstract class Question {
 	
 	public abstract void addCorrectAnswer(Answer a);
 	
-	public abstract int getNumberCorrect();
 	
 	public String getQuestion() {
 		return q;
@@ -39,4 +38,6 @@ public abstract class Question {
 	}
 	
 	public abstract Map<String, Integer> getResults();
+
+	public abstract ArrayList<Answer> getCorrect();
 }

@@ -24,4 +24,8 @@ public class Answer {
 	public String toString() {
 		return answer;
 	}
+	
+	public boolean equals(Answer a) {
+		return a.getAnswer() == answer;
+	}
 }

@@ -4,24 +4,18 @@ public class SimulationDriver {
 
 	public static void main(String[] args) {
 		IVoteService IVS = new IVoteService();
-		IVS.setQuestion("What is my name?", false);
-		IVS.getQuestion().addAnswerChoice(new Answer("Anthony"));
-		IVS.getQuestion().addAnswerChoice(new Answer("Bryan"));
-		IVS.getQuestion().addAnswerChoice(new Answer("Steve"));
+		IVS.setQuestion("What is my name?", true);
+		IVS.setABCD();
 		
-		IVS.getQuestion().addCorrectAnswer(new Answer("Bryan"));
-		
-		Student s1 = IVS.addRandomStudent();
-		Student s2 = IVS.addRandomStudent();
-		Student s3 = IVS.addRandomStudent();
-		Student s4 = IVS.addRandomStudent();
-		
-		IVS.vote(s1, new Answer("Anthony"));
-		IVS.vote(s2, new Answer("Bryan"));
-		IVS.vote(s3, new Answer("Bryan"));
-		IVS.vote(s4, new Answer("Bryan"));
-		IVS.vote(s4, new Answer("Steve"));
-		
+		String[] randAnswers = { "A", "B", "C", "D" };
+		int numStudents = (int) (Math.random() * 100);
+		for (int i = 0; i < numStudents; i++) {
+			for (int j = 0; j < 4; j++) {
+				Student temp = IVS.addRandomStudent();
+				int randomChoice = (int) (Math.random() * 4);
+				IVS.vote(temp, new Answer(randAnswers[randomChoice]));
+			}
+		}
 		IVS.printResults();
 
 	}

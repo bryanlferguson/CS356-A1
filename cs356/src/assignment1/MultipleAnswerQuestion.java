@@ -7,15 +7,16 @@ import java.util.Map;
 
 public class MultipleAnswerQuestion extends Question{
 
-	private Map<String, Answer[]> answers;
+	private Map<String, ArrayList<Answer>> answers;
 	private List<Answer> correct;
 
 	public MultipleAnswerQuestion(String q) {
 		super(q);
-		answers = new HashMap<String, Answer[]>();
+		answers = new HashMap<String, ArrayList<Answer>>();
+		correct = new ArrayList<Answer>();
 	}
 
-	public boolean setAnswers(Student s, Answer[] a) {
+	public boolean setAnswers(Student s, ArrayList<Answer> a) {
 		for (Answer ans : a) {
 			if (!getPossibleAnswers().contains(ans))
 				return false;
@@ -24,12 +25,17 @@ public class MultipleAnswerQuestion extends Question{
 		return true;
 	}
 
-	@Override
 	public boolean setAnswers(Student s, Answer a) {
-		return false;
+		ArrayList<Answer> temp;
+		if (answers.get(s.getID()) == null)
+			temp = new ArrayList<Answer>();
+		else
+			temp = answers.get(s.getID());
+		temp.add(a);
+		answers.put(s.getID(), temp);
+		return true;
 	}
 
-	@Override
 	public void addCorrectAnswer(Answer a) {
 		correct.add(a);
 	}
@@ -40,15 +46,20 @@ public class MultipleAnswerQuestion extends Question{
 		addAnswerChoice(a);
 	}
 
-	public int getNumberCorrect() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Map<String, Integer> getResults() {
+		Map<String, Integer> ret = new HashMap<String, Integer>();
+		for (ArrayList<Answer> al: answers.values()) {
+			for (Answer value: al ) {
+				int temp = ret.get(value.toString()) == null ? 0 : ret.get(value.toString());
+				temp++;
+				ret.put(value.toString(), temp);
+			}
+		}
+		return ret;
 	}
 
-	@Override
-	public Map<String, Integer> getResults() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Answer> getCorrect() {
+		return (ArrayList<Answer>) correct;
 	}
 
 }
