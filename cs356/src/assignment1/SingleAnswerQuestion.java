@@ -15,17 +15,12 @@ public class SingleAnswerQuestion extends Question{
 		answers = new HashMap<String, Answer>();
 	}
 
-	public boolean setAnswers(Student s, Answer a) {
-		if (!getPossibleAnswers().contains(a))
-			return false;
+	public void setAnswers(Student s, Answer a) {
 		answers.put(s.getID(), a);
-		return true;
 	}
 
-	@Override
 	public void addCorrectAnswer(Answer a) {
 		correct = a;
-		
 	}
 
 	public void addAnswerChoice(Answer a, boolean c) {

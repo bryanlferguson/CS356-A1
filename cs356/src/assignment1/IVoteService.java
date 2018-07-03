@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 public class IVoteService {
 	private Question q;
 	private List<Student> students;
-	private Scanner s;
 
 	public IVoteService() {
 		students = new ArrayList<Student>();
-		s = new Scanner(System.in);
-		s.close();
 	}
 	
 	public void setQuestion(String ques, boolean multipleAnswers) {
@@ -67,11 +63,19 @@ public class IVoteService {
 		q.setAnswers(s, a);
 	}
 	
-	public void setABCD() {
+	public void setABCDMultiple() {
 		q.addAnswerChoice(new Answer("A"), Math.random() < .5);
 		q.addAnswerChoice(new Answer("B"), Math.random() < .5);
 		q.addAnswerChoice(new Answer("C"), Math.random() < .5);
 		q.addAnswerChoice(new Answer("D"), Math.random() < .5);
 		
+	}
+	
+	public void setABCDSingle() {
+		int c = (int) (Math.random() * 4);
+		q.addAnswerChoice(new Answer("A"), c == 0);
+		q.addAnswerChoice(new Answer("B"), c == 1);
+		q.addAnswerChoice(new Answer("C"), c == 2);
+		q.addAnswerChoice(new Answer("D"), c == 3);
 	}
 }

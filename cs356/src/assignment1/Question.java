@@ -14,7 +14,7 @@ public abstract class Question {
 		this.q = q;
 	}
 	
-	public abstract boolean setAnswers(Student s, Answer a);
+	public abstract void setAnswers(Student s, Answer a);
 	
 	public void addAnswerChoice(Answer a) {
 		possibleAnswers.add(a);

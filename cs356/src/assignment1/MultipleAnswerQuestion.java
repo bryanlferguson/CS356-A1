@@ -16,16 +16,11 @@ public class MultipleAnswerQuestion extends Question{
 		correct = new ArrayList<Answer>();
 	}
 
-	public boolean setAnswers(Student s, ArrayList<Answer> a) {
-		for (Answer ans : a) {
-			if (!getPossibleAnswers().contains(ans))
-				return false;
-		}
+	public void setAnswers(Student s, ArrayList<Answer> a) {
 		answers.put(s.getID(), a);
-		return true;
 	}
 
-	public boolean setAnswers(Student s, Answer a) {
+	public void setAnswers(Student s, Answer a) {
 		ArrayList<Answer> temp;
 		if (answers.get(s.getID()) == null)
 			temp = new ArrayList<Answer>();
@@ -33,7 +28,6 @@ public class MultipleAnswerQuestion extends Question{
 			temp = answers.get(s.getID());
 		temp.add(a);
 		answers.put(s.getID(), temp);
-		return true;
 	}
 
 	public void addCorrectAnswer(Answer a) {
